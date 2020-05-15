@@ -1,0 +1,88 @@
+---
+title: "Natural Language Processing (NLP)"
+author: "Farid Tayari"
+date: "5/14/2020"
+output: slidy_presentation
+
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## NLP: Predicting the Next Word {.smaller}
+
+
+This application can suggest the next word based on six predictive models that user can choose from. These models are based on two methods of [Katz Back-off]( https://en.wikipedia.org/wiki/Katz%27s_back-off_model) and [Linear Interpolation](http://www.cs.columbia.edu/~mcollins/lm-spring2013.pdf). 
+
+-	Katz Back-off Bigrams
+-	Katz Back-off Trigrams
+-	Katz Back-off 4-grams
+-	Linear Interpolation Bigrams
+-	Linear Interpolation Trigrams
+-	Linear Interpolation 4-grams  
+  
+#### Train set  
+Train set used in this application is a small (can be changed by the user 0.2% to 20%) subset of three data sets:
+
+- en_US.blogs.txt
+- en_US.news.txt
+- en_US.twitter.txt
+
+These text file can be downloaded [here](https://d396qusza40orc.cloudfront.net/dsscapstone/dataset/Coursera-SwiftKey.zip)  
+
+
+## Predictive models
+After n-grams are built, we can see many word combinations with zero frequency in the train set. Consequently, these word combinations will receive zero probability in the model. Two of methods used to fix this problem are:  
+
+- Katz Back-off
+- Linear Interpolation
+
+Katz Back-off method estimates the probabilities of n-gram based on the lower order n-gram.  
+Linear Interpolation method estimates the probabilities by considering the weighted average of all previous order n-grams. For example, Trigram Linear Interpolation uses weighted average of Trigram, Bigram, and Unigram probabilities. 
+
+More detailed information about these methods can be found in:  
+[Speech and Language Processing by Daniel Jurafsky and James H. Martin](https://web.stanford.edu/~jurafsky/slp3/ed3book.pdf)
+
+
+
+## Steps to run the model  {.smaller}
+- Loading the data and creating the n-grams
+- Choosing the model and model parameters
+- Entering the text and running the application 
+
+The text has to be at least two words for Bigram, three words for Trigram, and four words for 4-gram models.
+
+![](D:/Coursera/Data Science/10 Data Science Capstone/R_Directory/model.png)
+
+
+## Steps to run the model {.smaller}
+
+The model will display a plot that includes the predicted words with the probabilities.
+
+User can choose the weights and discount factors (gamma) in the models. However, because the train set is fairly small, changing the weights will not show significant changes in the predictions.
+
+User can also determine the ratio of data set that will be dedicated to the train set. However, the application is running on a public server, which doesn't support computational power required for higher train set proportions. Consequently, it has to be kept low (around 5% for a 60 MB text file corpus). Therefore, the accuracy of the predictions might be low.
+
+User can also upload a new corpus. However, because of the processing and memory limitations, the maximum size of the uploaded file is set to 50 MB.
+
+![](D:/Coursera/Data Science/10 Data Science Capstone/R_Directory/model_1.png)
+
+
+
+  
+  
+## References   
+- [Speech and Language Processing by Daniel Jurafsky and James H. Martin](https://web.stanford.edu/~jurafsky/slp3/ed3book.pdf)
+- [Machine Learning Hub](https://www.youtube.com/channel/UCB_JX4jH3QQmp69rmkWpl1A)
+- [Natural Language Processing course by Dan Jurafsky and Christopher Manning](https://www.youtube.com/playlist?list=PLQiyVNMpDLKnZYBTUOlSI9mi9wAErFtFm)
+- [Linear Interpolation]( http://www.cs.columbia.edu/~mcollins/lm-spring2013.pdf)
+- [R packages: quanteda ](https://tutorials.quanteda.io/)
+
+
+
+The application is accessible [here](https://faridtayari.shinyapps.io/NLP_word_prediction/) and on [Github](https://github.com/faridtayari/Natural-Language-Processing)
+
+
